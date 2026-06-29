@@ -28,14 +28,43 @@ h1 {
   margin-bottom: 16px;
 }
 
+.search-bar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
 .search-input {
+  flex: 1;
+  padding: 14px 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.search-btn {
+  padding: 0 24px;
+  border: none;
+  border-radius: 8px;
+  background: #ff7a00;
+  color: #fff;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.toggle-form-btn {
   display: block;
   width: 100%;
-  padding: 10px 12px;
+  padding: 12px 0;
   margin-bottom: 16px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  font-size: 14px;
+  border: none;
+  border-radius: 8px;
+  background: #ff7a00;
+  color: #fff;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
 }
 
 .burger-image {
@@ -43,6 +72,42 @@ h1 {
   height: 160px;
   object-fit: cover;
   border-radius: 8px;
+  cursor: pointer;
+}
+
+.image-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.image-modal-content {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+}
+
+.image-modal-content img {
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: 8px;
+  display: block;
+}
+
+.image-modal-close {
+  position: absolute;
+  top: -36px;
+  right: 0;
+  padding: 6px 14px;
+  border: none;
+  border-radius: 6px;
+  background: #fff;
+  font-weight: 600;
+  cursor: pointer;
 }
 
 .burger-form {

@@ -24,6 +24,8 @@ export default function App() {
   const [form, setForm] = useState(emptyForm)
   const [editingId, setEditingId] = useState(null)
   const [search, setSearch] = useState('')
+  const [searchInput, setSearchInput] = useState('')
+  const [showForm, setShowForm] = useState(false)
 
   useEffect(() => {
     fetchBurgers()
@@ -90,6 +92,7 @@ export default function App() {
       location: burger.location,
       image_url: burger.image_url || '',
     })
+    setShowForm(true)
   }
 
   async function handleDelete(id) {
@@ -122,26 +125,42 @@ export default function App() {
       .includes(keyword)
   })
 
+  function handleSearch() {
+    setSearch(searchInput)
+  }
+
   return (
     <div className="container">
-      <h1>서울 수제버거 맛집 TOP 10</h1>
+      <h1>햄버거 맛집 도장깨기</h1>
 
       {error && <div className="error">에러: {error}</div>}
 
-      <input
-        className="search-input"
-        placeholder="가게명, 메뉴, 위치로 검색"
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-      />
+      <div className="search-bar">
+        <input
+          className="search-input"
+          placeholder="가게명, 메뉴, 위치로 검색"
+          value={searchInput}
+          onChange={(e) => setSearchInput(e.target.value)}
+          onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
+        />
+        <button className="search-btn" onClick={handleSearch}>
+          검색
+        </button>
+      </div>
 
-      <BurgerForm
-        form={form}
-        setForm={setForm}
-        onSubmit={handleSubmit}
-        isEditing={!!editingId}
-        onCancel={handleCancelEdit}
-      />
+      <button className="toggle-form-btn" onClick={() => setShowForm((prev) => !prev)}>
+        {showForm ? '닫기' : '맛집 추가하기'}
+      </button>
+
+      {showForm && (
+        <BurgerForm
+          form={form}
+          setForm={setForm}
+          onSubmit={handleSubmit}
+          isEditing={!!editingId}
+          onCancel={handleCancelEdit}
+        />
+      )}
 
       {loading ? (
         <p>불러오는 중...</p>
